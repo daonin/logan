@@ -10,6 +10,7 @@ namespace LogAn.UnitTests
         public bool IsValid(string fileName)
         {
             return WillBeValid;
+
         }
     }
     [TestFixture]
