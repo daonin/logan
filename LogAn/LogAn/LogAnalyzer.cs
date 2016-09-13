@@ -8,11 +8,31 @@ namespace LogAn
 {
     public class LogAnalyzer
     {
+        private IExtentionManager _manager;
+
+        public IExtentionManager ExtentionManager
+        {
+            get { return _manager; }
+            set { _manager = value; }
+        }
+        public LogAnalyzer()
+        {
+            _manager = ExtentionManagerFactory.Create();
+        }
+        public bool WasLastFileNameValid { get; set; }
+
         public bool IsValidLogFileName(string fileName)
         {
-            return fileName.EndsWith(
-                ".slf", 
-                StringComparison.CurrentCultureIgnoreCase);
+            WasLastFileNameValid = false;
+
+            if (string.IsNullOrWhiteSpace(fileName))
+                throw new ArgumentException("Filename has to be provided.");
+
+            bool result = _manager.IsValid(fileName);
+
+            WasLastFileNameValid = result;
+            return result;
         }
+
     }
 }

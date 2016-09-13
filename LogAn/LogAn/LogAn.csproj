@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtentionManagerFactory.cs" />
+    <Compile Include="FileExtentionManager.cs" />
+    <Compile Include="IExtentionManager.cs" />
     <Compile Include="LogAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
