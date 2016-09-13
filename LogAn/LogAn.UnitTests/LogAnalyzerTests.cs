@@ -19,6 +19,7 @@ namespace LogAn.UnitTests
         private LogAnalyzer MakeAnalyzer()
         {
             return new LogAnalyzer();
+
         }
 
         [TearDown]
