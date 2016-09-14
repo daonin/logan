@@ -13,6 +13,20 @@ namespace LogAn.UnitTests
 
         }
     }
+
+    internal class TestableLogAnalyzer : LogAnalyzer
+    {
+        private IExtentionManager _manager;
+
+        public TestableLogAnalyzer(IExtentionManager manager)
+        {
+            _manager = manager;
+        }
+        public override IExtentionManager GetExtentionManager()
+        {
+            return _manager;
+        }
+    }
     [TestFixture]
     public class LogAnalyzerTests
     {
@@ -88,10 +102,8 @@ namespace LogAn.UnitTests
             FakeExtentionManager fakeExtentionManager = new FakeExtentionManager();
             fakeExtentionManager.WillBeValid = true;
 
-            var logAnalyzer = MakeAnalyzer();
-
-            logAnalyzer.ExtentionManager = fakeExtentionManager;
-
+            var logAnalyzer = new TestableLogAnalyzer(fakeExtentionManager);
+            
             bool result = logAnalyzer.IsValidLogFileName("validlog.foo");
 
             Assert.True(result);
