@@ -17,7 +17,12 @@ namespace LogAn
         }
         public LogAnalyzer()
         {
-            _manager = ExtentionManagerFactory.Create();
+            //_manager = ExtentionManagerFactory.Create();
+        }
+
+        public virtual IExtentionManager GetExtentionManager()
+        {
+            return ExtentionManagerFactory.Create();
         }
         public bool WasLastFileNameValid { get; set; }
 
@@ -28,7 +33,7 @@ namespace LogAn
             if (string.IsNullOrWhiteSpace(fileName))
                 throw new ArgumentException("Filename has to be provided.");
 
-            bool result = _manager.IsValid(fileName);
+            bool result = GetExtentionManager().IsValid(fileName);
 
             WasLastFileNameValid = result;
             return result;
